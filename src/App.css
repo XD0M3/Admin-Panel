@@ -2,17 +2,65 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #2e2d2d;
+    background-color: #0a0a0a;
     color: antiquewhite;
 }
 
 div.mittig {
     position: absolute;
     left: 50%;
-    margin-left: -200px;
-    width: 400px;
+    margin-left: -23px;
+    width: 46px;
     top: 50%;
-    margin-top: -200px;
-    height: 400px;
+    margin-top: -23px;
+    height: 46px;
     text-align: center;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #222;
+}
+    .top{
+    width: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: #ff6600;
+
+    }
+
+.right {
+    height: 0%;
+    position: absolute;
+    width: 2px;
+    top: 0;
+    right: 0;
+    background: #ff6600;
+}
+
+.bottom {
+    width: 0%;
+    position: absolute;
+    height: 2px;
+    bottom: 0;
+    right: 0;
+    background: #ff6600;
+}
+
+.left {
+    height: 0%;
+    position: absolute;
+    width: 2px;
+    bottom: 0;
+    left: 0;
+    background: #ff6600;
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -22,11 +22,11 @@
     <title>React App</title>
   </head>
   <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <!--
+      <noscript>
+          You need to enable JavaScript to run this app.
+      </noscript>
+      <div id="root"></div>
+      <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -36,5 +36,41 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+      <script src="https://code.jquery.com/jquery-3.3.1.js"
+              integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+              crossorigin="anonymous"></script>
+      <script>
+          $(document).ready(function () {
+              var test = setInterval("app.start()", 10);
+          });
+
+          var app = {
+              time: 0,
+              end: 4,
+
+              start: function () {
+                  var step = this.end / 4;
+
+                  if (this.time <= (step * 1)) {
+                      var percent = this.time / step * 100;
+                      $(".top").css("width", percent + "%");
+                  }
+                  if (this.time > (step * 1) && this.time <= (step * 2)) {
+                      var percent = this.time / (step * 2) * 200 - 100;
+                      $(".right").css("height", percent + "%");
+                  }
+                  if (this.time > (step * 2) && this.time <= (step * 3)) {
+                      var percent = this.time / (step * 3) * 300 - 200;
+                      $(".bottom").css("width", percent + "%");
+                  }
+                  if (this.time > (step * 3) && this.time <= (step * 4)) {
+                      var percent = this.time / (step * 4) * 400 - 300;
+                      $(".left").css("height", percent + "%");
+                  }
+
+                  this.time += 0.01;
+              }
+          };
+      </script>
   </body>
 </html>
