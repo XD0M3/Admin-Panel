@@ -39,6 +39,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(app.get('port'))
+app.listen(3001);
 
 module.exports = app;
