@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Title from './Title';
+import Loading from './Loading';
 import Content from './Content';
 
 class App extends Component {
@@ -13,9 +12,9 @@ class App extends Component {
 
     render() {
         if (this.state.stage === "loading") {
-            this.loading = setTimeout(() => this.setState({ stage: "index" }), 4000);
+            this.loading = setTimeout(() => this.setState({ stage: "index" }), 7001);
             return (
-                <Title />
+                <Loading />
             );
         } else {
             return (

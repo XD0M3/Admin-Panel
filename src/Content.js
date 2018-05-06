@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 
-class Title extends Component {
+import Login from './Login';
+
+class Content extends Component {
     constructor(props) {
         super(props);
-        this.state = {users: []};
+        this.state = { loggedIn: false};
     }
 
     componentDidMount() {
-        fetch('/users')
-            .then(res => res.json())
-            .then(users => this.setState({ users }));
+       
     }
 
     componentWillUnmount() {
         
     }
 
+    login(/*Nutzername*/name,/*Passwort*/passwort) {
+        alert("Nutzername: " + name + " | Passwort: " + passwort);
+    }
 
     render() {
 
-        return (
-            <div className="container">
-                {this.state.users.map(user => <h1>{user.id}</h1>)}
-            </div>
+        return ( 
+            <Login login={this.login} />
         );
     }
 }
 
 
 
-export default Title;
+export default Content;

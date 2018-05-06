@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #222121;
+    background-color: #232323;
     color: antiquewhite;
 }
 
@@ -28,39 +28,19 @@ div.mittig {
     bottom: 0;
     background: #000000;
 }
-    .top{
-    width: 0%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 2px;
-    background: #ff6600;
 
-    }
-
-.right {
-    height: 0%;
-    position: absolute;
-    width: 2px;
-    top: 0;
-    right: 0;
-    background: #ff6600;
+.semi {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    margin-top: 20px;
+    background: antiquewhite;
+    color: black;
 }
+.loading {
+    width: 200px;
 
-.bottom {
-    width: 0%;
-    position: absolute;
-    height: 2px;
-    bottom: 0;
-    right: 0;
-    background: #ff6600;
 }
-
-.left {
-    height: 0%;
-    position: absolute;
-    width: 2px;
-    bottom: 0;
-    left: 0;
-    background: #ff6600;
+.login {
+    height: 100%;
 }
