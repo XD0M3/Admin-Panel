@@ -17,7 +17,10 @@ class Content extends Component {
     }
 
     login(/*Nutzername*/name,/*Passwort*/passwort) {
-        alert("Nutzername: " + name + " | Passwort: " + passwort);
+        fetch("http://localhost:4000/users/", {
+            method: "POST",
+            body: JSON.stringify({name: name, passwort: passwort})
+        }).then((response) => alert(JSON.stringify(response)));
     }
 
     render() {
