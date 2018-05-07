@@ -5,6 +5,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.login = props.login;
+        this.classes = props.classes;
     }
 
     email = "";
@@ -51,7 +52,7 @@ class Login extends Component {
 					                   </div>
 
                             <div className="container-login100-form-btn p-t-10">
-                                <button className="login100-form-btn" onClick={() => this.login(this.email, this.password)}>
+                                <button className="login100-form-btn" onClick={() => this.login(this.email, this.password, this.classes)}>
                                                 Login
 						                    </button>
                                         </div>

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
 var con = mysql.createConnection({
@@ -11,18 +13,23 @@ var con = mysql.createConnection({
     });
 
 /* GET users listing. */
+router.use(express.json());       // to support JSON-encoded bodies
+router.use(express.urlencoded()); // to support URL-encoded bodies
 router.post('/', function(req, res) {
-    let name = req.query.name;
+    console.log(req.body);
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.send(JSON.stringify({login: true}));
+    /*
+     let name = req.query.name;
     let u = req.query.password;
     let hashedPW = bcrypt.hash(u, 10, function (err, hash) {
         return hash;
     });
-
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.json({
         login: true
     });
-    console.log(req.body)
-    /*res.setHeader('Acces-Control-Allow-Origin', "*");
+     * res.setHeader('Acces-Control-Allow-Origin', "*");
     console.log(JSON.stringify(req.body));
     res.json({ login: true });*/
 });

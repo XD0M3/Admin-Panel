@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 
 import Login from './Login';
+import Panel from './Panel';
 
 class Content extends Component {
     constructor(props) {
         super(props);
         this.state = { loggedIn: false};
+    }
+
+    wrong = {
+        error: false,
+        message: ""
     }
 
     componentDidMount() {
@@ -16,33 +22,40 @@ class Content extends Component {
         
     }
 
-    login(/*Nutzername*/namex,/*Passwort*/passwortx) {
+    login(/*Nutzername*/namex,/*Passwort*/passwortx, /*Class*/ classes) {
         let data = new FormData();
         data.append('json', JSON.stringify({ "name": namex, "passwort": passwortx }));
         fetch("http://localhost:4000/login", {
-            method: "post",
-            header: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json"
-            },
-            mode: "no-cors",
-            body: data
-        }).then((response) => alert());
-        /*var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-
-        }
-        xhttp.open("POST", "http://localhost:4000/login");
-        xhttp.setRequestHeader("Content-Type", "application/json");
-        xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-        xhttp.send(JSON.stringify({ name: namex, passwort: passwortx}));*/
+            method: "POST",
+            body: JSON.stringify({ "name": namex, "passwort": passwortx })
+        }).then((response) => response.json())
+            .then(function (r) {
+                let suc = r.loginSuccesfull;
+                if (suc) {
+                    sessionStorage.setItem('login', suc);
+                    sessionStorage.setItem('login_name', namex);
+                    classes.setState({ loggedIn: true });
+                } else {
+                    classes.wrong = {
+                        error: true,
+                        message: "Something Went Wrong!"
+                    };
+                    classes.setState({ loggedIn: false });
+                }
+            });
+        
     }
 
     render() {
-
-        return ( 
-            <Login login={this.login} />
-        );
+        if (sessionStorage.getItem('login') || this.state.loggedIn) {
+            return (
+                <Panel />
+            );
+        } else {
+            return (
+                <Login login={this.login} classes={this} wrong={this.wrong} />
+            );
+        }
     }
 }
 
