@@ -8,10 +8,10 @@ var con = mysql.createConnection({
     user: "root",
     password: "04041977Manuela",
     database: "esladminpanel"
-});
+    });
 
 /* GET users listing. */
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
     let name = req.query.name;
     let u = req.query.password;
     let hashedPW = bcrypt.hash(u, 10, function (err, hash) {
@@ -21,7 +21,10 @@ router.post('/', function(req, res, next) {
     res.json({
         login: true
     });
-    
+    console.log(req.body)
+    /*res.setHeader('Acces-Control-Allow-Origin', "*");
+    console.log(JSON.stringify(req.body));
+    res.json({ login: true });*/
 });
 
 module.exports = router;
