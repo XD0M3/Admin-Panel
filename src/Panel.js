@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Tournaments from './Tournaments';
 
 class Panel extends Component {
     constructor(props) {
@@ -62,15 +62,14 @@ class Panel extends Component {
                                 </ul>
                             </div>
                         </div>
-    </nav>
+                    </nav>
                     <div className="page">
 
                         <header className="header">
                             <nav className="navbar">
                                 <div className="container-fluid">
                                     <div className="navbar-holder d-flex align-items-center justify-content-between">
-                                        <div className="navbar-header"><a id="toggle-btn" href="#" className="menu-btn"><i className="icon-bars"> </i></a><a href="index.html" className="navbar-brand">
-                                        </a></div>
+                                        <div className="navbar-header"></div>
                                         <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
 
                                             <li className="nav-item"><a href="login.html" className="nav-link logout"> <span className="d-none d-sm-inline-block">Logout</span><i className="fas fa-sign-out-alt"></i></a></li>
@@ -79,7 +78,9 @@ class Panel extends Component {
                                 </div>
                             </nav>
                         </header>
-
+                    <div className="container-fluid">
+                       <Tournaments />
+                    </div>
                         <footer className="main-footer">
                             <div className="container-fluid">
                                 <div className="row">

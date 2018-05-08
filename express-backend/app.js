@@ -28,17 +28,22 @@ app.post('/login', function (req, ress) {
     var op = JSON.parse(req.body);
     console.log("Connected!");
     con.query("SELECT * FROM user WHERE name ='" + op['name'] + "';", function (err, result, fields) {
-        bcrypt.compare(op['passwort'], result[0].passwort, function (err,res) {
+        if (result.length > 0) {
+            bcrypt.compare(op['passwort'], result[0].passwort, function (err, res) {
+                ress.setHeader("Access-Control-Allow-Origin", "*");
+                if (res) {
+                    console.log("Password Matches!");
+                    ress.json({ loginSuccesfull: true });
+                } else {
+                    console.log("Passwort doesnt match!");
+                    ress.json({ loginSuccesfull: false });
+                }
+            });
+        } else {
             ress.setHeader("Access-Control-Allow-Origin", "*");
-            if (res) {
-                console.log("Password Matches!");
-                ress.json({loginSuccesfull: true});
-            } else {
-                console.log("Passwort doesnt match!");
-                ress.json({ loginSuccesfull: false });
-            }
-            
-        });
+            ress.json({ loginSuccesfull: false });
+        }
+        
     });
     
 
