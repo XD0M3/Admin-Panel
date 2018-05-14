@@ -5,7 +5,10 @@ class Panel extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-
+        this.avatar = sessionStorage.getItem('avatar');
+        this.rank = sessionStorage.getItem('rank');
+        this.name = sessionStorage.getItem('login_name');
+        this.c = props.classes;
     }
 
     componentDidMount() {
@@ -16,9 +19,14 @@ class Panel extends Component {
         
     }
 
-    tick() {
-
-
+    logOut(cast) {
+        sessionStorage.setItem('login', false);
+        sessionStorage.setItem('login_name', "");
+        sessionStorage.setItem('rank', "");
+        sessionStorage.setItem('avatar', "");
+        console.log("test");
+        cast.setState({ loggedIn: false, key: Math.random() });
+        //cast.setStage({ loggedIn: false});
     }
 
     render() {
@@ -30,11 +38,11 @@ class Panel extends Component {
 
                         <div className="sidenav-header d-flex align-items-center justify-content-center">
 
-                            <div className="sidenav-header-inner text-center"><img src="https://i.imgur.com/XcvGZVc.png" alt="person" className="img-fluid rounded-circle" />
-                                <h2 className="h5">XD0M3</h2><span>Editional Staff Head</span>
+                            <div className="sidenav-header-inner text-center"><img src={this.avatar} alt="person" className="img-fluid rounded-circle" />
+                                <h2 className="h5">{this.name}</h2><span>{this.rank}</span>
           </div>
 
-                                <div className="sidenav-header-logo"><a href="index.html" className="brand-small text-center"> <strong>B</strong><strong className="text-primary">D</strong></a></div>
+                                <div className="sidenav-header-logo"><a href="" className="brand-small text-center"> <strong>B</strong><strong className="text-primary">D</strong></a></div>
                             </div>
 
                             <div className="main-menu">
@@ -72,7 +80,7 @@ class Panel extends Component {
                                         <div className="navbar-header"></div>
                                         <ul className="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
 
-                                            <li className="nav-item"><a href="login.html" className="nav-link logout"> <span className="d-none d-sm-inline-block">Logout</span><i className="fas fa-sign-out-alt"></i></a></li>
+                                        <li className="nav-item"><a className="nav-link logout" onClick={() => this.logOut(this.c)}> <span className="d-none d-sm-inline-block">Logout</span><i className="fas fa-sign-out-alt"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>

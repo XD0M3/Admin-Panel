@@ -5,6 +5,7 @@ var mysql = require('mysql');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const puppeteer = require('puppeteer');
 
 var con = mysql.createConnection({
     host: "185.223.28.28",
@@ -32,8 +33,9 @@ app.post('/login', function (req, ress) {
             bcrypt.compare(op['passwort'], result[0].passwort, function (err, res) {
                 ress.setHeader("Access-Control-Allow-Origin", "*");
                 if (res) {
+                    console.log(res);
                     console.log("Password Matches!");
-                    ress.json({ loginSuccesfull: true });
+                    ress.json({ loginSuccesfull: true, rank: result[0].rank, avatar: result[0].avatar_url });
                 } else {
                     console.log("Passwort doesnt match!");
                     ress.json({ loginSuccesfull: false });
@@ -44,10 +46,25 @@ app.post('/login', function (req, ress) {
             ress.json({ loginSuccesfull: false });
         }
         
-    });
-    
+    }); 
+});
 
+app.get('/cups', function (rq, res) {
+    (async () => {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto('https://play.eslgaming.com/leagueoflegends/eu-west/tournaments', { waitUntil: 'networkidle2' });
+        let hmtl = await page.content();
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("My-Test-Header", "1234");
+        var o = hmtl.split('<div class=\"league-list cups\">');
+        o = o[1];
+        //o = o.split('</div>')[0];
+        res.send(o);
 
+        console.log("test");
+        await browser.close();
+    })();
     
 });
 

@@ -14,6 +14,8 @@ class Content extends Component {
         message: ""
     }
 
+    user = {};
+
     componentDidMount() {
        
     }
@@ -31,27 +33,35 @@ class Content extends Component {
         }).then((response) => response.json())
             .then(function (r) {
                 let suc = r.loginSuccesfull;
+                let x = {rank: r.rank, avatar: r.avatar}
                 if (suc) {
-                    sessionStorage.setItem('login', suc);
+                    console.log(r);
+                    sessionStorage.setItem('login', true);
                     sessionStorage.setItem('login_name', namex);
-                    classes.setState({ loggedIn: true });
+                    sessionStorage.setItem('rank', r.rank);
+                    sessionStorage.setItem('avatar', r.avatar);
+                    classes.setState({ loggedIn: true, key: Math.random() });
+                    classes.user = x;
                 } else {
                     classes.wrong = {
                         error: true,
                         message: "Something Went Wrong!"
                     };
-                    classes.setState({ loggedIn: false });
+                    classes.setState({ loggedIn: false, key: Math.random() });
                 }
             });
         
     }
 
     render() {
-        if (sessionStorage.getItem('login') || this.state.loggedIn) {
+        console.log(sessionStorage.getItem('login') + " = false | " + this.state.loggedIn + " = false");
+        if (sessionStorage.getItem('login') == true || this.state.loggedIn == true) {
+            console.log("Panel rendered!");
             return (
-                <Panel />
+                <Panel user={this.user} classes={this} />
             );
         } else {
+            console.log("Login rendered!");
             return (
                 <Login login={this.login} classes={this} wrong={this.wrong} />
             );
